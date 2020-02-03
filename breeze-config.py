@@ -18,6 +18,7 @@
 
 import sys
 from pathlib import Path
+from shutil import copyfile
 from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QVBoxLayout,
                              QComboBox, QDialogButtonBox)
 from PyQt5.QtCore import (QDir, qDebug)
@@ -30,6 +31,8 @@ class MainWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # uic.loadUi("designer/main.ui", self)
+        self.confFile = Path(str(Path.home()) + "/.config/kdeglobals")
+        self.schemeDir = "/usr/share/color-schemes/"
         self.initUI()
 
     def initUI(self):
@@ -47,13 +50,15 @@ class MainWindow(QWidget):
         self.setWindowTitle("Lubuntu Breeze Config")
 
         '''populate combobox needed with uic'''
-        dir = QDir("/usr/share/color-schemes/")
+        dir = QDir(self.schemeDir)
         files = dir.entryList(dir, dir.Files)
         self.comboBox.clear()
         self.comboBox.addItem("None")
         for f in files:
             self.comboBox.addItem(f.split(".")[0])
         self.comboBox.setCurrentText(self.checkCurrent())
+        
+        self.buttonBox.clicked.connect(self.btnClk)
 
         self.center()
 
@@ -68,10 +73,9 @@ class MainWindow(QWidget):
 
     def checkCurrent(self):
         '''check current used theme'''
-        confFile = Path(str(Path.home()) + "/.config/kdeglobals")
-        if confFile.is_file():
-            qDebug("exist: " + str(confFile))
-            with open(str(confFile)) as f:
+        if self.confFile.is_file():
+            qDebug("exist: " + str(self.confFile))
+            with open(str(self.confFile)) as f:
                 for line in f:
                     item = line.split("=")
                     if item[0] == "ColorScheme":
@@ -82,11 +86,18 @@ class MainWindow(QWidget):
                 qDebug("No Color Scheme found on file")
                 return("None")
         else:
-            qDebug(str(confFile) + "wasn't found")
+            qDebug(str(self.confFile) + " wasn't found")
             return("None")
 
-    def apply(self):
-        '''copy selected color-scheme to kdeglobals'''
+    def btnClk(self, btn):
+        '''copy selected color-scheme to kdeglobals or close'''
+        if btn == self.buttonBox.button(QDialogButtonBox.Apply):
+            qDebug("apply")
+            copyfile(self.schemeDir + self.comboBox.currentText() +
+                     ".colors", self.confFile)
+        elif btn == self.buttonBox.button(QDialogButtonBox.Close):
+            qDebug("close")
+            app.close_()
 
 
 class App(QApplication):
