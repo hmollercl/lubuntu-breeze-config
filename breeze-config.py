@@ -40,7 +40,7 @@ class MainWindow(QWidget):
         self.label = QLabel()
         self.comboBox = QComboBox()
         self.buttonBox = QDialogButtonBox(QDialogButtonBox.Apply
-                                          | QDialogButtonBox.Cancel)
+                                          | QDialogButtonBox.Close)
         vbox = QVBoxLayout()
         vbox.addWidget(self.label)
         vbox.addWidget(self.comboBox)
@@ -95,9 +95,14 @@ class MainWindow(QWidget):
             qDebug("apply")
             copyfile(self.schemeDir + self.comboBox.currentText() +
                      ".colors", self.confFile)
+            # app.setStyleSheet()
+            # self.repaint()
+            # self.style().unpolish(self)
+            # self.style().polish(self)
+            # self.update()
+            
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
-            qDebug("close")
-            app.close_()
+            exit()
 
 
 class App(QApplication):
