@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import sys
 from pathlib import Path
 from shutil import copyfile
@@ -57,7 +58,7 @@ class MainWindow(QWidget):
         for f in files:
             self.comboBox.addItem(f.split(".")[0])
         self.comboBox.setCurrentText(self.checkCurrent())
-        
+
         self.buttonBox.clicked.connect(self.btnClk)
 
         self.center()
@@ -95,14 +96,10 @@ class MainWindow(QWidget):
             qDebug("apply")
             copyfile(self.schemeDir + self.comboBox.currentText() +
                      ".colors", self.confFile)
-            # app.setStyleSheet()
-            # self.repaint()
-            # self.style().unpolish(self)
-            # self.style().polish(self)
-            # self.update()
-            
+            os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
+
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
-            exit()
+            exit(0)
 
 
 class App(QApplication):
