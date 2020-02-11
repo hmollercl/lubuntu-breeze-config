@@ -39,14 +39,24 @@ class MainWindow(QWidget):
     def initUI(self):
         '''set UI not needed first part if uic is used'''
         self.label = QLabel()
+        self.note = QLabel()
         self.comboBox = QComboBox()
         self.buttonBox = QDialogButtonBox(QDialogButtonBox.Apply
                                           | QDialogButtonBox.Close)
         vbox = QVBoxLayout()
         vbox.addWidget(self.label)
         vbox.addWidget(self.comboBox)
+        vbox.addWidget(self.note)
         vbox.addWidget(self.buttonBox)
         self.label.setText("Select Color Scheme")
+        noteText = '''
+        <font size="-1">
+        Applications need to be restarted for changes to take effect<br/>
+        In case of pcmanfm-qt, since it handles the desktop,<br/>
+        a restart of the desktop is needed.<br/>
+        Easier, restart session.</font>
+        '''
+        self.note.setText(noteText)
         self.setLayout(vbox)
         self.setWindowTitle("Lubuntu Breeze Config")
 
@@ -94,8 +104,11 @@ class MainWindow(QWidget):
         '''copy selected color-scheme to kdeglobals or close'''
         if btn == self.buttonBox.button(QDialogButtonBox.Apply):
             qDebug("apply")
-            copyfile(self.schemeDir + self.comboBox.currentText() +
+            if self.comboBox.currentText() != "None":
+                copyfile(self.schemeDir + self.comboBox.currentText() +
                      ".colors", self.confFile)
+            else:
+                os.remove(self.confFile)
             os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
 
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
