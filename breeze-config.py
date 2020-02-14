@@ -69,8 +69,7 @@ class MainWindow(QWidget):
         self.comboBox.addItem("None")
         for f in self.files:
             settings = QSettings(self.schemeDir + f, QSettings.NativeFormat)
-            set = settings.value("ColorScheme")
-            self.comboBox.addItem(set)
+            self.comboBox.addItem(settings.value("ColorScheme"))
         self.comboBox.setCurrentText(self.checkCurrent())
 
         self.buttonBox.clicked.connect(self.btnClk)
@@ -107,9 +106,8 @@ class MainWindow(QWidget):
             qDebug("apply")
             if self.comboBox.currentText() != "None":
                 for f in self.files:
-                    settings = QSettings(self.schemeDir + f, QSettings.NativeFormat)
-                    set = settings.value("ColorScheme")
-                    if(set == self.comboBox.currentText()):
+                    set = QSettings(self.schemeDir + f, QSettings.NativeFormat)
+                    if(set.value("ColorScheme") == self.comboBox.currentText()):
                         copyfile(self.schemeDir + f, self.confFile)
             else:
                 os.remove(self.confFile)
