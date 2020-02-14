@@ -32,7 +32,7 @@ class MainWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
         # uic.loadUi("designer/main.ui", self)
-        self.confFile = Path(str(Path.home()) + "/.config/kdeglobals")
+        self.confFile = Path(Path.home() / ".config/kdeglobals")
         self.schemeDir = "/usr/share/color-schemes/"
         self.initUI()
 
@@ -48,13 +48,15 @@ class MainWindow(QWidget):
         vbox.addWidget(self.comboBox)
         vbox.addWidget(self.note)
         vbox.addWidget(self.buttonBox)
-        self.label.setText("Select Color Scheme")
+        self.label.setText("Select Color Scheme for Breeze Qt Syle:")
         noteText = '''
         <font size="-1">
-        Applications need to be restarted for changes to take effect<br/>
+        Applications need to be restarted for changes to take effect.<br/>
         In case of pcmanfm-qt, since it handles the desktop,<br/>
         a restart of the desktop is needed.<br/>
-        Easier, restart session.</font>
+        Easier, restart session.<br/>
+        Best results if a matching GTK Theme is selected.
+        </font>
         '''
         self.note.setText(noteText)
         self.setLayout(vbox)
