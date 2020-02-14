@@ -22,7 +22,7 @@ from pathlib import Path
 from shutil import copyfile
 from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QVBoxLayout,
                              QComboBox, QDialogButtonBox)
-from PyQt5.QtCore import (QDir, qDebug)
+from PyQt5.QtCore import (QDir, qDebug, QSettings)
 from PyQt5.QtGui import QIcon
 # from PyQt5 import uic
 # from PyQt5 import QtX11Extras
@@ -48,7 +48,7 @@ class MainWindow(QWidget):
         vbox.addWidget(self.comboBox)
         vbox.addWidget(self.note)
         vbox.addWidget(self.buttonBox)
-        self.label.setText("Select Color Scheme for Breeze Qt Syle:")
+        self.label.setText("Select Color Scheme for Breeze Qt Style:")
         noteText = '''
         <font size="-1">
         Applications need to be restarted for changes to take effect.<br/>
@@ -64,11 +64,13 @@ class MainWindow(QWidget):
 
         '''populate combobox needed with uic'''
         dir = QDir(self.schemeDir)
-        files = dir.entryList(dir, dir.Files)
+        self.files = dir.entryList(dir, dir.Files)
         self.comboBox.clear()
         self.comboBox.addItem("None")
-        for f in files:
-            self.comboBox.addItem(f.split(".")[0])
+        for f in self.files:
+            settings = QSettings(self.schemeDir + f, QSettings.NativeFormat)
+            set = settings.value("ColorScheme")
+            self.comboBox.addItem(set)
         self.comboBox.setCurrentText(self.checkCurrent())
 
         self.buttonBox.clicked.connect(self.btnClk)
@@ -88,15 +90,12 @@ class MainWindow(QWidget):
         '''check current used theme'''
         if self.confFile.is_file():
             qDebug("exist: " + str(self.confFile))
-            with open(str(self.confFile)) as f:
-                for line in f:
-                    item = line.split("=")
-                    if item[0] == "ColorScheme":
-                        current = item[1].replace("\n", "")  # remove \n
-                        current = current.replace(" ", "")  # remove spaces
-                        qDebug("current scheme: " + current)
-                        return(current)
-                qDebug("No Color Scheme found on file")
+            settings = QSettings(str(self.confFile), QSettings.NativeFormat)
+            set = settings.value("ColorScheme")
+            qDebug(set)
+            if set != "":
+                return(set)
+            else:
                 return("None")
         else:
             qDebug(str(self.confFile) + " wasn't found")
@@ -107,8 +106,11 @@ class MainWindow(QWidget):
         if btn == self.buttonBox.button(QDialogButtonBox.Apply):
             qDebug("apply")
             if self.comboBox.currentText() != "None":
-                copyfile(self.schemeDir + self.comboBox.currentText() +
-                     ".colors", self.confFile)
+                for f in self.files:
+                    settings = QSettings(self.schemeDir + f, QSettings.NativeFormat)
+                    set = settings.value("ColorScheme")
+                    if(set == self.comboBox.currentText()):
+                        copyfile(self.schemeDir + f, self.confFile)
             else:
                 os.remove(self.confFile)
             os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
