@@ -20,9 +20,12 @@ import os
 import sys
 from pathlib import Path
 from shutil import copyfile
-from PyQt5.QtWidgets import (QWidget, QApplication, QDialogButtonBox)
+from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QVBoxLayout,
+                             QComboBox, QDialogButtonBox)
 from PyQt5.QtCore import (QDir, qDebug, QSettings)
+from PyQt5.QtGui import QIcon
 from PyQt5 import uic
+from PyQt5 import QtX11Extras
 import gettext
 
 class MainWindow(QWidget):
@@ -34,6 +37,30 @@ class MainWindow(QWidget):
         self.initUI()
 
     def initUI(self):
+        '''set UI not needed first part if uic is used'''
+        '''self.label = QLabel()
+        self.note = QLabel()
+        self.comboBox = QComboBox()
+        self.buttonBox = QDialogButtonBox(QDialogButtonBox.Apply
+                                          | QDialogButtonBox.Close)
+        vbox = QVBoxLayout()
+        vbox.addWidget(self.label)
+        vbox.addWidget(self.comboBox)
+        vbox.addWidget(self.note)
+        vbox.addWidget(self.buttonBox)
+        self.label.setText(_("Select Color Scheme for Breeze Qt Style:"))
+        noteText =_("Applications need to be restarted for changes to take effect.")
+        noteText += "<br/>"
+        noteText += _("In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed")
+        noteText += "<br/>"
+        noteText += _("Easier, restart session.")
+        noteText += "<br/>"
+        noteText += _("Best results if a matching GTK Theme is selected.")
+
+        self.note.setText('<font size="-1">' + noteText + '</font>')
+        self.setLayout(vbox)
+        self.setWindowTitle("Lubuntu Breeze Config")
+        '''
 
         '''populate combobox needed with uic'''
         noteText =_("Applications need to be restarted for changes to take effect.")
@@ -53,8 +80,10 @@ class MainWindow(QWidget):
             settings = QSettings(self.schemeDir + f, QSettings.NativeFormat)
             self.comboBox.addItem(settings.value("ColorScheme"))
         self.comboBox.setCurrentText(self.checkCurrent())
+
         self.buttonBox.clicked.connect(self.btnClk)
-        self.center()
+
+        # self.center()
 
     def center(self):
         '''centers UI'''

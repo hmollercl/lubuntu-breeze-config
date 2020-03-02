@@ -1,0 +1,37 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2020-02-16 15:51-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+
+
+#: breeze-config.py:51
+msgid "Select Color Scheme for Breeze Qt Style:"
+msgstr ""
+
+#: breeze-config.py:52
+msgid "Applications need to be restarted for changes to take effect."
+msgstr ""
+
+#: breeze-config.py:54
+msgid "In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed"
+msgstr ""
+
+#: breeze-config.py:56
+msgid "Easier, restart session."
+msgstr ""
+
+#: breeze-config.py:58
+msgid "Best results if a matching GTK Theme is selected."
+msgstr ""
+
