@@ -1,0 +1,11 @@
+[Desktop Entry]
+Exec=lubuntu-breeze-config
+Name=Configure Breeze Theme
+GenericName=Apply Full Upgrade
+Comment=Configure Breeze Theme
+Icon=preferences-desktop-color
+Type=Application
+Version=0.1
+Categories=System;Settings;DesktopSettings;Qt;LXQt;
+Keywords=upgrade;update
+Terminal=false

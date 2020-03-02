@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Main</class>
+ <widget class="QWidget" name="Main">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>479</width>
+    <height>168</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Lubuntu Breeze Config</string>
+  </property>
+  <property name="windowIcon">
+   <iconset theme="preferences-desktop-color">
+    <normaloff>.</normaloff>.</iconset>
+  </property>
+  <property name="toolTip">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>Select Color Scheme</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QComboBox" name="comboBox"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="note">
+     <property name="text">
+      <string>&lt;font size=&quot;-1&quot;&gt;Applications need to be restarted for changes to take effect.&lt;br&gt;
+In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed&lt;br/&gt;
+Easier, restart session.&lt;br/&gt;Best results if a matching GTK Theme is selected.&lt;/font&gt;</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="buttonBox">
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Apply|QDialogButtonBox::Close</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

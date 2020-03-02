@@ -1,0 +1,4 @@
+# data/upg-apply.desktop usr/share/applications
+# data/upg-notifier-autostart.desktop etc/xdg/autostart
+debian/tmp/usr/share/applications/lubuntu-breeze-config.desktop
+debian/tmp/usr/share/lubuntu-breeze-config/designer
