@@ -22,5 +22,11 @@ setup(
     name="lubuntu-breeze-config",
     version="0.1",
     packages=['lubuntu-breeze-config'],
-    scripts=['lubuntu-breeze-config'],
+    scripts=['breeze-config'],
+    data_files=[
+                ('lib/lubuntu-breeze-config/',
+                ['lubuntuBreeze.py', ]
+                ),
+                ],
+    test_suite="tests",
 )

@@ -1,0 +1,9 @@
+breeze-config
+lubuntuBreeze.py
+setup.cfg
+setup.py
+lubuntu-breeze-config/__init__.py
+lubuntu_breeze_config.egg-info/PKG-INFO
+lubuntu_breeze_config.egg-info/SOURCES.txt
+lubuntu_breeze_config.egg-info/dependency_links.txt
+lubuntu_breeze_config.egg-info/top_level.txt
