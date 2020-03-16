@@ -5,7 +5,7 @@ import unittest
 import sys
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QDir, QSettings
-from PyQt5.QtTest import QTest
+# from PyQt5.QtTest import QTest
 from pathlib import Path
 from gettext import gettext as _  # better than in main "_ = gettext.gettext" for testing
 
@@ -21,7 +21,7 @@ import lubuntuBreeze
 app = QApplication(sys.argv)
 
 class LubuntuBreezeTest(unittest.TestCase):
-    
+
     def setUp(self):
         self.form = lubuntuBreeze.MainWindow()
         dir = QDir(self.form.schemeDir)
@@ -33,21 +33,21 @@ class LubuntuBreezeTest(unittest.TestCase):
         label = _("Select Color Scheme for Breeze Qt Style:")
         noteText =_("Applications need to be restarted for changes to take effect.")
         noteText += "<br/>"
-        noteText += _("In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed")
-        noteText += "<br/>"
+        noteText += _("In case of pcmanfm-qt, since it handles the desktop, ")
+        noteText += _("a restart of the desktop is needed") + "<br/>"
         noteText += _("Easier, restart session.")
         noteText += "<br/>"
         noteText += _("Best results if a matching GTK Theme is selected.")
-        
+
         self.assertEqual(self.form.label.text(), label)
         self.assertEqual(self.form.note.text(), '<font size="-1">' + noteText + '</font>')
-    
+
     def testComoboxPopulation(self):
-        '''test if combobox is populated with same entries as number of files 
+        '''test if combobox is populated with same entries as number of files
         (+1 because on None)'''
         len(self.files)
         self.assertEqual(self.form.comboBox.count(), len(self.files) + 1)
-    
+
     def testComoboxSelected(self):
         '''test if comobox select the actual'''
         if self.confFile.is_file():
@@ -56,7 +56,7 @@ class LubuntuBreezeTest(unittest.TestCase):
             self.assertEqual(self.form.comboBox.currentText(), set)
         else:
             self.assertEqual(self.form.comboBox.currentText(), _("None"))
-    
+
 
     """def testSelectApply(self):
         '''check if '''
@@ -71,8 +71,8 @@ class LubuntuBreezeTest(unittest.TestCase):
                     # copyfile(self.schemeDir + f, self.confFile)
         else:
             # select NONE and see if file is removed
-                
-    
+
+
 
     def testClose(self):
         '''test apply'''

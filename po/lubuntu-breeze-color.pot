@@ -15,23 +15,23 @@ msgstr ""
 "Generated-By: pygettext.py 1.5\n"
 
 
-#: lubuntu-breeze-config.py:39
+#: lubuntuBreeze.py:39
 msgid "Select Color Scheme for Breeze Qt Style:"
 msgstr ""
 
-#: lubuntu-breeze-config.py:40
+#: lubuntuBreeze.py:40
 msgid "Applications need to be restarted for changes to take effect."
 msgstr ""
 
-#: lubuntu-breeze-config.py:42
+#: lubuntuBreeze.py:42
 msgid "In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed"
 msgstr ""
 
-#: lubuntu-breeze-config.py:44
+#: lubuntuBreeze.py:44
 msgid "Easier, restart session."
 msgstr ""
 
-#: lubuntu-breeze-config.py:46
+#: lubuntuBreeze.py:46
 msgid "Best results if a matching GTK Theme is selected."
 msgstr ""
 

@@ -39,8 +39,8 @@ class MainWindow(QWidget):
         self.label.setText(_("Select Color Scheme for Breeze Qt Style:"))
         noteText =_("Applications need to be restarted for changes to take effect.")
         noteText += "<br/>"
-        noteText += _("In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed")
-        noteText += "<br/>"
+        noteText += _("In case of pcmanfm-qt, since it handles the desktop, ")
+        noteText += _("a restart of the desktop is needed") + "<br/>"
         noteText += _("Easier, restart session.")
         noteText += "<br/>"
         noteText += _("Best results if a matching GTK Theme is selected.")
@@ -92,7 +92,7 @@ class MainWindow(QWidget):
                         copyfile(self.schemeDir + f, self.confFile)
             else:
                 os.remove(self.confFile)
-            filename = os.path.dirname(os.path.abspath(__file__)) + '/breeze-config' 
+            filename = os.path.dirname(os.path.abspath(__file__)) + '/breeze-color' 
             print(filename)
             subprocess.Popen(filename)
             sys.exit(0)

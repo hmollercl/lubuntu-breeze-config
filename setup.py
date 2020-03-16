@@ -19,13 +19,13 @@
 from setuptools import setup
 
 setup(
-    name="lubuntu-breeze-config",
+    name="lubuntu-breeze-color",
     version="0.1",
-    packages=['lubuntu-breeze-config'],
-    scripts=['breeze-config'],
+    packages=['lubuntu-breeze-color'],
+    scripts=['breeze-color'],
     data_files=[
-                ('lib/lubuntu-breeze-config/',
-                ['lubuntuBreeze.py', ]
+                ('lib/lubuntu-breeze-color/',
+                ['lubuntuBreezeColor.py', ]
                 ),
                 ],
     test_suite="tests",
