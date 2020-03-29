@@ -92,7 +92,7 @@ class MainWindow(QWidget):
                         copyfile(self.schemeDir + f, self.confFile)
             else:
                 os.remove(self.confFile)
-            filename = os.path.dirname(os.path.abspath(__file__)) + '/breeze-color' 
+            filename = os.path.dirname(os.path.abspath(__file__)) + '/breeze-color'
             print(filename)
             subprocess.Popen(filename)
             sys.exit(0)

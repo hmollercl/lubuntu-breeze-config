@@ -25,7 +25,7 @@ setup(
     scripts=['breeze-color'],
     data_files=[
                 ('lib/lubuntu-breeze-color/',
-                ['lubuntuBreezeColor.py', ]
+                ['lubuntuBreeze.py', ]
                 ),
                 ],
     test_suite="tests",

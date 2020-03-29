@@ -1,0 +1,4 @@
+#!/bin/sh
+
+xvfb-run
+python3 setup.py test
