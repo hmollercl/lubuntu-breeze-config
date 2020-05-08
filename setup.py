@@ -21,12 +21,12 @@ from setuptools import setup
 setup(
     name="lubuntu-breeze-color",
     version="0.1",
-    packages=['lubuntu-breeze-color'],
+    packages=['lubuntubreezecolor'],
     scripts=['breeze-color'],
-    data_files=[
-                ('lib/lubuntu-breeze-color/',
-                ['lubuntuBreeze.py', ]
-                ),
-                ],
+    data_files=[('lib/lubuntubreezecolor/',
+                ['lubuntubreezecolor/breezecolor.py',]),
+                ('/usr/share/applications/', ['data/breeze-color.desktop']),
+                ('/usr/share/lubuntu-breeze-color/designer/',
+                ['data/designer/main.ui'])],
     test_suite="tests",
 )

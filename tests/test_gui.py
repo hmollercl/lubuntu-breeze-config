@@ -15,15 +15,18 @@ from gettext import gettext as _  # better than in main "_ = gettext.gettext" fo
 # help(lubuntuBreezeConfig)
 
 sys.path.insert(0, "")
-import lubuntuBreeze
+# import lubuntuBreeze
+# execfile('breeze-color')
+# lubuntuBreeze = __import__("breeze-color")
 
+from lubuntubreezecolor import breezecolor
 
 app = QApplication(sys.argv)
 
 class LubuntuBreezeTest(unittest.TestCase):
 
     def setUp(self):
-        self.form = lubuntuBreeze.MainWindow()
+        self.form = breezecolor.MainWindow()
         dir = QDir(self.form.schemeDir)
         self.files = dir.entryList(dir, dir.Files)
         self.confFile = Path(Path.home() / ".config/kdeglobals")
