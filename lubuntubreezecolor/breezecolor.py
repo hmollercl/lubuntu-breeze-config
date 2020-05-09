@@ -23,8 +23,10 @@ from pathlib import Path
 from shutil import copyfile
 from PyQt5.QtWidgets import (QWidget, QApplication, QDialogButtonBox)
 from PyQt5.QtCore import (QDir, qDebug, QSettings)
+from PyQt5.QtGui import (QPalette, QColor)
 from PyQt5 import uic
 from gettext import gettext as _  # better than in main "_ = gettext.gettext" for testing
+
 
 class MainWindow(QWidget):
     def __init__(self, options = None):
@@ -32,6 +34,7 @@ class MainWindow(QWidget):
         if options is not None:
             self.datadir = options.datadir
             self.scriptdir = options.scriptdir
+            self.restart = options.restart
         else:
             self.datadir = 'data'
             self.scriptdir = ''
@@ -87,17 +90,79 @@ class MainWindow(QWidget):
             qDebug(str(self.confFile) + " wasn't found")
             return("None")
 
-    def updateWindow(self):
-        filename = self.scriptdir + '/breeze-color'
-        print(filename)
-        subprocess.Popen(filename)
-        sys.exit(0)
+    def getColor(self, data):
+        if type(data) is list:
+            color = QColor(int(data[0]), int(data[1]), int(data[2]))
+        return(color)
+
+    def updateWindow(self, selected):
+        if self.restart == 1:
+            filename = self.scriptdir + '/breeze-color'
+            print(filename)
+            subprocess.Popen(filename)
+            sys.exit(0)
+
+        else:
+            nSettings = QSettings(selected, QSettings.NativeFormat)
+            nPalette = QPalette(app.style().standardPalette())
+
+            nSettings.beginGroup("Colors:Window")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.Window, color)
+            color = self.getColor(nSettings.value("ForegroundNormal"))
+            nPalette.setColor(QPalette.WindowText, color)
+            color = self.getColor(nSettings.value("ForegroundLink"))
+            nPalette.setColor(QPalette.Link, color)
+            nSettings.endGroup()
+
+            nSettings.beginGroup("Colors:View")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.Base, color)
+            color = self.getColor(nSettings.value("ForegroundNormal"))
+            nPalette.setColor(QPalette.Text, color)
+            nSettings.endGroup()
+
+            nSettings.beginGroup("Colors:Button")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.Button, color)
+            color = self.getColor(nSettings.value("ForegroundNormal"))
+            nPalette.setColor(QPalette.ButtonText, color)
+            nSettings.endGroup()
+
+            nSettings.beginGroup("Colors:Tooltip")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.ToolTipBase, color)
+            color = self.getColor(nSettings.value("ForegroundNormal"))
+            nPalette.setColor(QPalette.ToolTipText, color)
+            nSettings.endGroup()
+
+            nSettings.beginGroup("Colors:Selection")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.Highlight, color)
+            color = self.getColor(nSettings.value("ForegroundNormal"))
+            nPalette.setColor(QPalette.HighlightedText, color)
+            nSettings.endGroup()
+
+            app.setPalette(nPalette)
+            app.setStyleSheet("QPushButton:pressed {background-color: #2a82da}")
+
+
+        # TODO "modificar los colores de botones seleccionados
+        """darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
+
+    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
+    darkPalette.setColor(QPalette::Highlig        self.repaint()
+        self.show()
+        app.setStyle('Fusion')
+        app.setStyle('Breeze')
+        '''htedText, Qt::black);"""
+
         '''self.hide()
         self.repaint()
         self.show()
         app.setStyle('Fusion')
         app.setStyle('Breeze')
-        app.setPalette(app.style().standardPalette())'''
+        '''
 
     def btnClk(self, btn):
         '''copy selected color-scheme to kdeglobals or close'''
@@ -107,20 +172,22 @@ class MainWindow(QWidget):
                 for f in self.files:
                     set = QSettings(self.schemeDir + f, QSettings.NativeFormat)
                     if(set.value("ColorScheme") == self.comboBox.currentText()):
-                        copyfile(self.schemeDir + f, self.confFile)
+                        selected = self.schemeDir + f
+                        copyfile(selected, self.confFile)
             else:
                 os.remove(self.confFile)
-            self.updateWindow()
-
+            self.updateWindow(selected)
 
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
             exit(0)
+
 
 class App(QApplication):
     def __init__(self, options, *args):
         QApplication.__init__(self, *args)
         self.main = MainWindow(options)
         self.main.show()
+
 
 def main(args, options):
     global app
