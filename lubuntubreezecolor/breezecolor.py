@@ -87,6 +87,18 @@ class MainWindow(QWidget):
             qDebug(str(self.confFile) + " wasn't found")
             return("None")
 
+    def updateWindow(self):
+        filename = self.scriptdir + '/breeze-color'
+        print(filename)
+        subprocess.Popen(filename)
+        sys.exit(0)
+        '''self.hide()
+        self.repaint()
+        self.show()
+        app.setStyle('Fusion')
+        app.setStyle('Breeze')
+        app.setPalette(app.style().standardPalette())'''
+
     def btnClk(self, btn):
         '''copy selected color-scheme to kdeglobals or close'''
         if btn == self.buttonBox.button(QDialogButtonBox.Apply):
@@ -98,10 +110,8 @@ class MainWindow(QWidget):
                         copyfile(self.schemeDir + f, self.confFile)
             else:
                 os.remove(self.confFile)
-            filename = self.scriptdir + '/breeze-color'
-            print(filename)
-            subprocess.Popen(filename)
-            sys.exit(0)
+            self.updateWindow()
+
 
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
             exit(0)
