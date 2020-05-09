@@ -102,7 +102,6 @@ class MainWindow(QWidget):
             print(filename)
             subprocess.Popen(filename)
             sys.exit(0)
-            # self.setStyle()
 
         elif btn == self.buttonBox.button(QDialogButtonBox.Close):
             exit(0)
