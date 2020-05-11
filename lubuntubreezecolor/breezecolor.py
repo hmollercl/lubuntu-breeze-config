@@ -152,16 +152,23 @@ class MainWindow(QWidget):
             nSettings.endGroup()
 
             #################################################################
-            '''TODO Button hover, pressed and ¿checked, focus? colors.
-            with this config after 2 "apply" the button shrinks.
+            '''TODO Button of ComboBox
             '''
             deco = 'rgb(' + ",".join(decoFocus) + ')'
-            style = """QPushButton:hover{border-width: 1px;
-                                         border-style: solid;
+            style = ""
+            style = """QPushButton:hover{border-width: 1px; border-style: solid;
                                          border-color:""" + deco + """;
-                                         border-radius: 2px;}
-                       QPushButton:pressed{background-color: """ + deco +""";}
-                       QPushButton:focus{background-color: """ + deco + """;}"""
+                                         border-radius: 2px;
+                                         padding: 7px;
+                                         padding-left: 10px;
+                                         padding-right: 10px;}"""
+            style += "QPushButton:pressed{background-color: " + deco + ";}"
+            style += """QPushButton:focus{background-color: """ + deco + """;
+                                          border-color:""" + deco + """;
+                                          border-radius: 2px;
+                                          padding: 7px;
+                                          padding-left: 10px;
+                                          padding-right: 10px;}"""
             print(style)
             app.setStyle('Breeze')
             app.setPalette(nPalette)
