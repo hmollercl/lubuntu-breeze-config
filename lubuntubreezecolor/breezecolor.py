@@ -21,8 +21,9 @@ import subprocess
 import sys
 from pathlib import Path
 from shutil import copyfile
-from PyQt5.QtWidgets import (QWidget, QApplication, QDialogButtonBox)
-from PyQt5.QtCore import (QDir, qDebug, QSettings)
+from PyQt5.QtWidgets import (QWidget, QApplication, QDialogButtonBox,
+                             QStyleFactory)
+from PyQt5.QtCore import (QDir, qDebug, QSettings, QEvent)
 from PyQt5.QtGui import (QPalette, QColor)
 from PyQt5 import uic
 from gettext import gettext as _  # better than in main "_ = gettext.gettext" for testing
@@ -91,11 +92,15 @@ class MainWindow(QWidget):
             return("None")
 
     def getColor(self, data):
+        '''get the color as is written in the file and transform to QColor
+        currently only handels r,g,b format'''
         if type(data) is list:
             color = QColor(int(data[0]), int(data[1]), int(data[2]))
         return(color)
 
     def updateWindow(self, selected):
+        '''update the windows to new colors. If selected is 1 ap is restarted
+        else new QPalette and QStyleSheet are created'''
         if self.restart == 1:
             filename = self.scriptdir + '/breeze-color'
             print(filename)
@@ -127,6 +132,8 @@ class MainWindow(QWidget):
             nPalette.setColor(QPalette.Button, color)
             color = self.getColor(nSettings.value("ForegroundNormal"))
             nPalette.setColor(QPalette.ButtonText, color)
+            decoFocus = nSettings.value("DecorationFocus")
+            decoHover = nSettings.value("DecorationHover")
             nSettings.endGroup()
 
             nSettings.beginGroup("Colors:Tooltip")
@@ -137,32 +144,30 @@ class MainWindow(QWidget):
             nSettings.endGroup()
 
             nSettings.beginGroup("Colors:Selection")
-            color = self.getColor(nSettings.value("BackgroundNormal"))
-            nPalette.setColor(QPalette.Highlight, color)
             color = self.getColor(nSettings.value("ForegroundNormal"))
             nPalette.setColor(QPalette.HighlightedText, color)
+            deco = nSettings.value("BackgroundNormal")
+            color = self.getColor(nSettings.value("BackgroundNormal"))
+            nPalette.setColor(QPalette.Highlight, color)
             nSettings.endGroup()
 
+            #################################################################
+            '''TODO Button hover, pressed and ¿checked, focus? colors.
+            with this config after 2 "apply" the button shrinks.
+            '''
+            deco = 'rgb(' + ",".join(decoFocus) + ')'
+            style = """QPushButton:hover{border-width: 1px;
+                                         border-style: solid;
+                                         border-color:""" + deco + """;
+                                         border-radius: 2px;}
+                       QPushButton:pressed{background-color: """ + deco +""";}
+                       QPushButton:focus{background-color: """ + deco + """;}"""
+            print(style)
+            app.setStyle('Breeze')
             app.setPalette(nPalette)
-            app.setStyleSheet("QPushButton:pressed {background-color: #2a82da}")
+            self.setStyleSheet(style)
 
 
-        # TODO "modificar los colores de botones seleccionados
-        """darkPalette.setColor(QPalette::Link, QColor(42, 130, 218));
-
-    darkPalette.setColor(QPalette::Highlight, QColor(42, 130, 218));
-    darkPalette.setColor(QPalette::Highlig        self.repaint()
-        self.show()
-        app.setStyle('Fusion')
-        app.setStyle('Breeze')
-        '''htedText, Qt::black);"""
-
-        '''self.hide()
-        self.repaint()
-        self.show()
-        app.setStyle('Fusion')
-        app.setStyle('Breeze')
-        '''
 
     def btnClk(self, btn):
         '''copy selected color-scheme to kdeglobals or close'''
