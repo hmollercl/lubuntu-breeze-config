@@ -1,23 +1,24 @@
-Source: lubuntu-breeze-color
+Source: lubuntu-breeze-config
 Section: utils
 Priority: optional
 Maintainer: Hans P Möller <hmollercl@lubuntu.me>
 Build-Depends: debhelper-compat (= 12),
                dh-python,
+               dh-translations,
                python3-all,
                python3-setuptools,
+               xvfb
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Testsuite: autopkgtest-pkg-python
 
-Package: lubuntu-breeze-color
+Package: lubuntu-breeze-config
 Architecture: all
-Depends: python3,
-         python3-pyqt5,
-         ${misc:Depends},
-         ${python3:Depends},
+Depends: python3, python3-pyqt5, ${misc:Depends}, ${python3:Depends}
 Description: Breeze Theme Color Scheme Selector
- It lets you pick a color scheme from "/usr/share/color-schemes/" and copy it
- to "~/.config/kdeglobals" so system use it. Applications need restart in order
- to use it. Take into consideration that some file managers also manage the
- desktop so you need to restart that too.
+ It lets you pick a color scheme and change the transparency of the menus.
+ Color schemes are obtained from "/usr/share/color-schemes/" and when selected
+ copy to "~/.config/kdeglobals". For transparency of menu the settings are in
+ "~/.config/breezerc", a composition software is needed to take effect.
+ Applications need restart in order to apply changes. Take into consideration
+ that some file managers also manage the desktop so you need to restart that too

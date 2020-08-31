@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>479</width>
-    <height>168</height>
+    <width>571</width>
+    <height>305</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,11 +32,66 @@
     <widget class="QComboBox" name="comboBox"/>
    </item>
    <item>
+    <widget class="QLabel" name="label2">
+     <property name="text">
+      <string>Menu Transparency:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QSlider" name="horizontalSlider">
+     <property name="value">
+      <number>99</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="invertedAppearance">
+      <bool>false</bool>
+     </property>
+     <property name="invertedControls">
+      <bool>false</bool>
+     </property>
+     <property name="tickPosition">
+      <enum>QSlider::TicksBelow</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="label3a">
+       <property name="text">
+        <string>Transparent</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="label3b">
+       <property name="text">
+        <string>Opaque</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="note">
      <property name="text">
       <string>&lt;font size=&quot;-1&quot;&gt;Applications need to be restarted for changes to take effect.&lt;br&gt;
 In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed&lt;br/&gt;
-Easier, restart session.&lt;br/&gt;Best results if a matching GTK Theme is selected.&lt;/font&gt;</string>
+Easier, restart session.&lt;br/&gt;Best results if a matching GTK Theme is selected.&lt;br/&gt;
+Compton (or other compositor) needs to be enabled for transparency.&lt;/font&gt;</string>
      </property>
     </widget>
    </item>

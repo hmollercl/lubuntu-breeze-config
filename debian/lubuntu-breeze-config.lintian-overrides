@@ -1,0 +1,4 @@
+# although LXQt is not a valid category in FreeDesktop specification, it is used
+# by LXQt config as can be seen in
+# https://lintian.debian.org/tags/desktop-entry-invalid-category.html
+lubuntu-breeze-config: desktop-entry-invalid-category LXQt usr/share/applications/breeze-config.desktop

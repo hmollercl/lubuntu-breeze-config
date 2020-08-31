@@ -19,14 +19,13 @@
 from setuptools import setup
 
 setup(
-    name="lubuntu-breeze-color",
-    version="0.1",
-    packages=['lubuntubreezecolor'],
-    scripts=['breeze-color'],
-    data_files=[('lib/lubuntubreezecolor/',
-                ['lubuntubreezecolor/breezecolor.py',]),
-                ('/usr/share/applications/', ['data/breeze-color.desktop']),
-                ('/usr/share/lubuntu-breeze-color/designer/',
-                ['data/designer/main.ui'])],
+    name="lubuntu-breeze-config",
+    version="0.1.dev0",
+    packages=['lubuntubreeze'],
+    scripts=['breeze-config'],
+    data_files=[('share/applications/', ['data/breeze-config.desktop']),
+                ('share/lubuntu-breeze-config/designer/',
+                 ['data/designer/main.ui']),
+                ],
     test_suite="tests",
 )

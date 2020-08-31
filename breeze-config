@@ -18,7 +18,9 @@
 
 import sys
 from argparse import ArgumentParser
-from lubuntubreezecolor import breezecolor
+import gettext
+
+from lubuntubreeze import breezeconfig
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -27,21 +29,19 @@ if __name__ == "__main__":
                         version='%(prog)s 0.1')
     parser.add_argument("--data-dir",
                         dest="datadir",
-                        default="/usr/share/lubuntu-breeze-color",
+                        default="/usr/share/lubuntu-breeze-config",  # modificar al final
                         help="data directory for UI files")
-    parser.add_argument("--script-dir",
-                        dest="scriptdir",
-                        default="/bin",
-                        help="script directory, default /bin")
-    parser.add_argument("--restart",
-                        dest="restart",
-                        default="1",
-                        help="restart 1 or repaint 0 mode")
+    parser.add_argument("--bin-dir",
+                        dest="bindir",
+                        default="/bin",  # modificar al final
+                        help="directory where this script is, default /bin")
     options = parser.parse_args()
 
     # TODO translations replace gettext with _ ???
-    # localesApp="lubuntu-breeze"
-    # localesDir="/usr/share/locale"
-    # gettext.bindtextdomain(localesApp, localesDir)
-    # gettext.textdomain(localesApp)
-    breezecolor.main(sys.argv, options)
+    localesApp ="lubuntu-breeze-config"
+    localesDir ="/usr/share/locale"
+    gettext.bindtextdomain(localesApp, localesDir)
+    gettext.textdomain(localesApp)
+    _ = gettext.gettext
+    # to test run as "./breeze-config --data-dir data --bin-dir ."
+    breezeconfig.main(sys.argv, options)

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Exec=breeze-config
+Name=Lubuntu Breeze Config
+GenericName=Lubuntu Breeze Config
+Comment=Configure Breeze Theme
+Icon=preferences-desktop-color
+Type=Application
+Version=0.1
+Categories=System;Settings;DesktopSettings;Qt;LXQt;
+Keywords=breeze;config
+Terminal=false

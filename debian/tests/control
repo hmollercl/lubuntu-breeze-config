@@ -1,3 +1,2 @@
 Tests: run-tests
-Depends: xvfb,
-         @
+Depends: xvfb, @
