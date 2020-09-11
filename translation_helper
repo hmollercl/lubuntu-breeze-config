@@ -1,0 +1,2 @@
+xgettext lubuntubreeze/breezeconfig.py breeze-config --language=Python
+mv messages.po po/lubuntu-breeze-config.pot

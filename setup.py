@@ -28,7 +28,7 @@ class MyClean(clean):
         super().run()
 
         # Custom clean
-        print("removing translations")
+        print("Removing translations")
         subprocess.run(['rm', '-rf', 'translations'])
 
 
@@ -45,7 +45,7 @@ def add_mo_files(data_files):
                             'po/' + f], check=True)
 
             data_files.append(('share/locale/' + loc + '/LC_MESSAGES/',
-                             ['translations/' + mo]))
+                               ['translations/' + mo]))
 
     return data_files
 

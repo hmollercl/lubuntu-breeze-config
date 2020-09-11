@@ -51,14 +51,15 @@ class MainWindow(QWidget):
         self.label3b.setText(_("Opaque"))
         t = _("Applications need to be restarted for changes to take effect.")
         t += "<br/>"
-        t += _("In case of pcmanfm-qt, since it handles the desktop, ")
-        t += _("a restart of the desktop is needed") + "<br/>"
+        t += _("In case of pcmanfm-qt, since it handles the desktop, "
+               "a restart of the desktop is needed")
+        t += "<br/>"
         t += _("Easier, restart session.")
         t += "<br/>"
         t += _("Best results if a matching GTK Theme is selected.")
         t += "<br/>"
-        t += _("Compton (or other compositor) needs to be enabled ")
-        t += _("for transparency.")
+        t += _("Compton (or other compositor) needs to be enabled "
+               "for transparency.")
 
         self.note.setText('<font size="-1">' + t + '</font>')
         sDir = QDir(self.schemeDir)
