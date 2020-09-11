@@ -29,7 +29,7 @@ class MyClean(clean):
 
         # Custom clean
         print("Removing translations")
-        subprocess.run(['rm', '-rf', 'translations'])
+        # subprocess.run(['rm', '-rf', 'translations'])
 
 
 def add_mo_files(data_files):
@@ -41,11 +41,12 @@ def add_mo_files(data_files):
         loc, ext = os.path.splitext(f)
         if ext == '.po':
             mo = app_name + '.mo'
-            subprocess.run(['msgfmt', '-o', 'translations/' + mo,
+            subprocess.run(['mkdir', 'translations/' + loc])
+            subprocess.run(['msgfmt', '-o', 'translations/' + loc + '/' + mo,
                             'po/' + f], check=True)
 
             data_files.append(('share/locale/' + loc + '/LC_MESSAGES/',
-                               ['translations/' + mo]))
+                               ['translations/' + loc + '/' + mo]))
 
     return data_files
 
