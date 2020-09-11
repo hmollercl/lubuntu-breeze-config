@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Hans P Möller <hmollercl@lubuntu.me>
 Build-Depends: debhelper-compat (= 12),
                dh-python,
-               dh-translations,
                python3-all,
                python3-setuptools,
                xvfb

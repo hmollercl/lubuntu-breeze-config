@@ -152,5 +152,4 @@ class App(QApplication):
 def main(args, options):
     global app
     app = App(options, args)
-    # app.setWindowIcon(QIcon.fromTheme("preferences-desktop-color"))
     app.exec_()

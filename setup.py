@@ -17,15 +17,49 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from setuptools import setup
+import subprocess
+import os
+from distutils.command.clean import clean
+
+
+class MyClean(clean):
+    def run(self):
+        # Execute the classic clean command
+        super().run()
+
+        # Custom clean
+        print("removing translations")
+        subprocess.run(['rm', '-rf', 'translations'])
+
+
+def add_mo_files(data_files):
+    app_name = 'lubuntu-breeze-config'
+    mo = ''
+
+    subprocess.run(['mkdir', 'translations/'])
+    for f in os.listdir('po'):
+        loc, ext = os.path.splitext(f)
+        if ext == '.po':
+            mo = app_name + '.mo'
+            subprocess.run(['msgfmt', '-o', 'translations/' + mo,
+                            'po/' + f], check=True)
+
+            data_files.append(('share/locale/' + loc + '/LC_MESSAGES/',
+                             ['translations/' + mo]))
+
+    return data_files
+
+
+data_files = [('share/applications/', ['data/breeze-config.desktop']),
+              ('share/lubuntu-breeze-config/designer/',
+               ['data/designer/main.ui'])]
 
 setup(
     name="lubuntu-breeze-config",
     version="0.1.dev0",
     packages=['lubuntubreeze'],
     scripts=['breeze-config'],
-    data_files=[('share/applications/', ['data/breeze-config.desktop']),
-                ('share/lubuntu-breeze-config/designer/',
-                 ['data/designer/main.ui']),
-                ],
+    data_files=add_mo_files(data_files),
     test_suite="tests",
+    cmdclass={'clean': MyClean}
 )

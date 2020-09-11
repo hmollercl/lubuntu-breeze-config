@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>479</width>
-    <height>227</height>
+    <height>254</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,10 +33,21 @@
    </item>
    <item>
     <widget class="QLabel" name="note">
+     <property name="font">
+      <font>
+       <pointsize>-1</pointsize>
+      </font>
+     </property>
      <property name="text">
-      <string>&lt;font size=&quot;-1&quot;&gt;Applications need to be restarted for changes to take effect.&lt;br&gt;
+      <string>Applications need to be restarted for changes to take effect.&lt;br&gt;
 In case of pcmanfm-qt, since it handles the desktop, a restart of the desktop is needed&lt;br/&gt;
-Easier, restart session.&lt;br/&gt;Best results if a matching GTK Theme is selected.&lt;/font&gt;</string>
+Easier, restart session.&lt;br/&gt;Best results if a matching GTK Theme is selected.</string>
+     </property>
+     <property name="scaledContents">
+      <bool>true</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
