@@ -29,7 +29,7 @@ class MyClean(clean):
 
         # Custom clean
         print("Removing translations")
-        # subprocess.run(['rm', '-rf', 'translations'])
+        subprocess.run(['rm', '-rf', 'translations'])
 
 
 def add_mo_files(data_files):
