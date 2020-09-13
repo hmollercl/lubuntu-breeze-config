@@ -6,7 +6,8 @@ Build-Depends: debhelper-compat (= 12),
                dh-python,
                python3-all,
                python3-setuptools,
-               xvfb
+               xvfb,
+               gettext
 Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Testsuite: autopkgtest-pkg-python
